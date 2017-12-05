@@ -1,0 +1,16 @@
+c:\users\maftec_07\documents\visual studio 2015\Projects\CrearPDFPorCuadrante\ConnectorLibrary\bin\Debug\ConnectorLibrary.dll.config
+c:\users\maftec_07\documents\visual studio 2015\Projects\CrearPDFPorCuadrante\ConnectorLibrary\bin\Debug\ConnectorLibrary.dll
+c:\users\maftec_07\documents\visual studio 2015\Projects\CrearPDFPorCuadrante\ConnectorLibrary\bin\Debug\ConnectorLibrary.pdb
+c:\users\maftec_07\documents\visual studio 2015\Projects\CrearPDFPorCuadrante\ConnectorLibrary\obj\Debug\ConnectorLibrary.dll
+c:\users\maftec_07\documents\visual studio 2015\Projects\CrearPDFPorCuadrante\ConnectorLibrary\obj\Debug\ConnectorLibrary.pdb
+c:\users\maftec_07\documents\visual studio 2015\Projects\CrearPDFPorCuadrante\ConnectorLibrary\obj\Debug\ConnectorLibrary.csprojResolveAssemblyReference.cache
+C:\Users\ruben\Desktop\CrearPDFPorCuadrante\ConnectorLibrary\bin\Debug\ConnectorLibrary.dll
+C:\Users\ruben\Desktop\CrearPDFPorCuadrante\ConnectorLibrary\bin\Debug\ConnectorLibrary.pdb
+C:\Users\ruben\Desktop\CrearPDFPorCuadrante\ConnectorLibrary\obj\Debug\ConnectorLibrary.csprojResolveAssemblyReference.cache
+C:\Users\ruben\Desktop\CrearPDFPorCuadrante\ConnectorLibrary\obj\Debug\ConnectorLibrary.dll
+C:\Users\ruben\Desktop\CrearPDFPorCuadrante\ConnectorLibrary\obj\Debug\ConnectorLibrary.pdb
+C:\Users\Maftec_07\Source\Repos\PDFCuadrante\ConnectorLibrary\bin\Debug\ConnectorLibrary.dll
+C:\Users\Maftec_07\Source\Repos\PDFCuadrante\ConnectorLibrary\bin\Debug\ConnectorLibrary.pdb
+C:\Users\Maftec_07\Source\Repos\PDFCuadrante\ConnectorLibrary\obj\Debug\ConnectorLibrary.csprojResolveAssemblyReference.cache
+C:\Users\Maftec_07\Source\Repos\PDFCuadrante\ConnectorLibrary\obj\Debug\ConnectorLibrary.dll
+C:\Users\Maftec_07\Source\Repos\PDFCuadrante\ConnectorLibrary\obj\Debug\ConnectorLibrary.pdb

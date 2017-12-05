@@ -1,0 +1,28 @@
+c:\users\maftec_07\documents\visual studio 2015\Projects\CrearPDFPorCuadrante\CrearPDFPorCuadranteLibrary\obj\Debug\CrearPDFPorCuadranteLibrary.csprojResolveAssemblyReference.cache
+c:\users\maftec_07\documents\visual studio 2015\Projects\CrearPDFPorCuadrante\CrearPDFPorCuadranteLibrary\bin\Debug\CrearPDFPorCuadranteLibrary.dll.config
+c:\users\maftec_07\documents\visual studio 2015\Projects\CrearPDFPorCuadrante\CrearPDFPorCuadranteLibrary\bin\Debug\CrearPDFPorCuadranteLibrary.dll
+c:\users\maftec_07\documents\visual studio 2015\Projects\CrearPDFPorCuadrante\CrearPDFPorCuadranteLibrary\bin\Debug\CrearPDFPorCuadranteLibrary.pdb
+c:\users\maftec_07\documents\visual studio 2015\Projects\CrearPDFPorCuadrante\CrearPDFPorCuadranteLibrary\bin\Debug\ConnectorLibrary.dll
+c:\users\maftec_07\documents\visual studio 2015\Projects\CrearPDFPorCuadrante\CrearPDFPorCuadranteLibrary\bin\Debug\ConnectorLibrary.pdb
+c:\users\maftec_07\documents\visual studio 2015\Projects\CrearPDFPorCuadrante\CrearPDFPorCuadranteLibrary\obj\Debug\CrearPDFPorCuadranteLibrary.dll
+c:\users\maftec_07\documents\visual studio 2015\Projects\CrearPDFPorCuadrante\CrearPDFPorCuadranteLibrary\obj\Debug\CrearPDFPorCuadranteLibrary.pdb
+c:\users\maftec_07\documents\visual studio 2015\Projects\CrearPDFPorCuadrante\CrearPDFPorCuadranteLibrary\bin\Debug\itextsharp.dll
+c:\users\maftec_07\documents\visual studio 2015\Projects\CrearPDFPorCuadrante\CrearPDFPorCuadranteLibrary\bin\Debug\itextsharp.xml
+C:\Users\ruben\Desktop\CrearPDFPorCuadrante\CrearPDFPorCuadranteLibrary\bin\Debug\CrearPDFPorCuadranteLibrary.dll
+C:\Users\ruben\Desktop\CrearPDFPorCuadrante\CrearPDFPorCuadranteLibrary\bin\Debug\CrearPDFPorCuadranteLibrary.pdb
+C:\Users\ruben\Desktop\CrearPDFPorCuadrante\CrearPDFPorCuadranteLibrary\bin\Debug\ConnectorLibrary.dll
+C:\Users\ruben\Desktop\CrearPDFPorCuadrante\CrearPDFPorCuadranteLibrary\bin\Debug\itextsharp.dll
+C:\Users\ruben\Desktop\CrearPDFPorCuadrante\CrearPDFPorCuadranteLibrary\bin\Debug\ConnectorLibrary.pdb
+C:\Users\ruben\Desktop\CrearPDFPorCuadrante\CrearPDFPorCuadranteLibrary\bin\Debug\itextsharp.xml
+C:\Users\ruben\Desktop\CrearPDFPorCuadrante\CrearPDFPorCuadranteLibrary\obj\Debug\CrearPDFPorCuadranteLibrary.csprojResolveAssemblyReference.cache
+C:\Users\ruben\Desktop\CrearPDFPorCuadrante\CrearPDFPorCuadranteLibrary\obj\Debug\CrearPDFPorCuadranteLibrary.dll
+C:\Users\ruben\Desktop\CrearPDFPorCuadrante\CrearPDFPorCuadranteLibrary\obj\Debug\CrearPDFPorCuadranteLibrary.pdb
+C:\Users\Maftec_07\Source\Repos\PDFCuadrante\CrearPDFPorCuadranteLibrary\bin\Debug\CrearPDFPorCuadranteLibrary.dll
+C:\Users\Maftec_07\Source\Repos\PDFCuadrante\CrearPDFPorCuadranteLibrary\bin\Debug\CrearPDFPorCuadranteLibrary.pdb
+C:\Users\Maftec_07\Source\Repos\PDFCuadrante\CrearPDFPorCuadranteLibrary\bin\Debug\ConnectorLibrary.dll
+C:\Users\Maftec_07\Source\Repos\PDFCuadrante\CrearPDFPorCuadranteLibrary\bin\Debug\itextsharp.dll
+C:\Users\Maftec_07\Source\Repos\PDFCuadrante\CrearPDFPorCuadranteLibrary\bin\Debug\ConnectorLibrary.pdb
+C:\Users\Maftec_07\Source\Repos\PDFCuadrante\CrearPDFPorCuadranteLibrary\bin\Debug\itextsharp.xml
+C:\Users\Maftec_07\Source\Repos\PDFCuadrante\CrearPDFPorCuadranteLibrary\obj\Debug\CrearPDFPorCuadranteLibrary.csprojResolveAssemblyReference.cache
+C:\Users\Maftec_07\Source\Repos\PDFCuadrante\CrearPDFPorCuadranteLibrary\obj\Debug\CrearPDFPorCuadranteLibrary.dll
+C:\Users\Maftec_07\Source\Repos\PDFCuadrante\CrearPDFPorCuadranteLibrary\obj\Debug\CrearPDFPorCuadranteLibrary.pdb
