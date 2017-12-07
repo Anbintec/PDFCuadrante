@@ -16,12 +16,14 @@ namespace CrearPDFPorCuadrante
     public partial class FormPDFCuadrante : Form
     {
         private static FolderBrowserDialog folderBrowserdialog = new FolderBrowserDialog();
-      
+        private OpenFileDialog open = new OpenFileDialog();
         object ProyectoSeleccionado = new object();
         object CuadranteSeleccionado = new object();
         bool esTrineo = false;
+        int tipoBusqueda = 0;
         string url = "";
-        private FormLoading _waitForm;
+        string path = "";
+        
 
 
         public FormPDFCuadrante()
@@ -31,11 +33,13 @@ namespace CrearPDFPorCuadrante
 
         private void FormPDFCuadrante_Load(object sender, EventArgs e)
         {
-           
+            panelLoading.Visible = false;
+            panelCsv.Visible = false;
+            panelCuadrante.Visible = false;
             comboBoxProyectos.DataSource = DAOPDF.Instance.ObtieneProyectos();
         }
 
-      
+
 
         private void comboBoxProyectos_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -43,10 +47,10 @@ namespace CrearPDFPorCuadrante
             if ((int)comboBoxProyectos.SelectedValue != 0)
             {
                 if (checkBoxEsTrineo.Checked)
-                   comboBoxCuadrante.DataSource= DAOPDF.Instance.ObtieneCuadrantes((int)comboBoxProyectos.SelectedValue,1);
+                    comboBoxCuadrante.DataSource = DAOPDF.Instance.ObtieneCuadrantes((int)comboBoxProyectos.SelectedValue, 1);
                 else
                     comboBoxCuadrante.DataSource = DAOPDF.Instance.ObtieneCuadrantes((int)comboBoxProyectos.SelectedValue, 0);
-                
+
             }
         }
 
@@ -54,7 +58,7 @@ namespace CrearPDFPorCuadrante
         {
             if ((int)comboBoxProyectos.SelectedValue > 0)
             {
-                comboBoxCuadrante.DataSource = DAOPDF.Instance.ObtieneCuadrantes((int)comboBoxProyectos.SelectedValue, checkBoxEsTrineo.Checked ? 1:0);
+                comboBoxCuadrante.DataSource = DAOPDF.Instance.ObtieneCuadrantes((int)comboBoxProyectos.SelectedValue, checkBoxEsTrineo.Checked ? 1 : 0);
             }
         }
 
@@ -68,39 +72,33 @@ namespace CrearPDFPorCuadrante
 
         private void ButtonSubmit_Click(object sender, EventArgs e)
         {
-          
+
             this.ProyectoSeleccionado = comboBoxProyectos.SelectedItem;
             this.CuadranteSeleccionado = comboBoxCuadrante.SelectedItem;
             this.esTrineo = checkBoxEsTrineo.Checked;
             this.url = folderBrowserdialog.SelectedPath;
+            this.tipoBusqueda = radioButtonCuadrante.Checked ? 1 : radioButtonCsv.Checked ? 2 : 0;
+            panelLoading.Visible = true;
+            panelLoading.BringToFront();
             backgroundWorkerGenerarPDF.RunWorkerAsync();
-            
+
         }
 
-        private void ShowFormLoading()
-        {
-            _waitForm = new FormLoading();
-            _waitForm.SetMessage(""); // "Loading data. Please wait..."
-            _waitForm.TopMost = true;
-            _waitForm.StartPosition = FormStartPosition.CenterScreen;
-            
-            _waitForm.Show();
-            _waitForm.Refresh();
-        }
+       
         private void IniciaProceso()
         {
             string mensaje = "";
-            
-            if (!DAONumeroOrden.Instance.CrearPFDPorCuadrante(ProyectoSeleccionado, CuadranteSeleccionado, esTrineo, url, out mensaje))
+
+            if (!DAONumeroOrden.Instance.CrearPFDPorCuadrante(ProyectoSeleccionado, CuadranteSeleccionado, esTrineo, url, tipoBusqueda,open.FileName,open.SafeFileName, out mensaje))
                 MessageBox.Show(mensaje);
             else
-                MessageBox.Show("Se genero el archivo con " + mensaje + " travelers", "Atención", MessageBoxButtons.OK);
-            _waitForm.Close();
+                MessageBox.Show("Se genero el archivo "+ mensaje + " travelers en la ruta especificada", "Atención", MessageBoxButtons.OK);
+            
         }
 
         private void backgroundWorkerGenerarPDF_DoWork(object sender, DoWorkEventArgs e)
         {
-            ShowFormLoading();
+           // ShowFormLoading();
             IniciaProceso();
         }
 
@@ -123,7 +121,34 @@ namespace CrearPDFPorCuadrante
             {
                 //MessageBox.Show("The task has been completed. Results: " + e.Result.ToString());
                 //MessageBox.Show("Se termino el proceso");
-               
+                panelLoading.Visible = false;
+            }
+
+        }
+
+        private void radioButtonCuadrante_Click(object sender, EventArgs e)
+        {
+            panelCuadrante.Visible = true;
+            panelCsv.Visible = false;
+            panelCuadrante.BringToFront();
+        }
+
+        private void radioButtonCsv_Click(object sender, EventArgs e)
+        {
+            panelCuadrante.Visible = false;
+            panelCsv.Visible = true;
+            panelCsv.BringToFront();
+        }
+
+        private void buttonExaminar_Click(object sender, EventArgs e)
+        {
+
+            open.Filter = "csv Files|*.csv";
+            open.Title = "Selecciona un archivo csv";
+
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                labelArchivoSeleciconado.Text = open.SafeFileName;
             }
 
         }

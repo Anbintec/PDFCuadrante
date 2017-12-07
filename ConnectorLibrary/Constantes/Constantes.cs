@@ -36,7 +36,6 @@ namespace ConnectorLibrary.Constantes
         public static string PDF_SP_GetProyectos = "PDF_SP_GetProyectos";
         public static string PDF_SP_GetCuadrantes = "PDF_SP_GetCuadrantes";
         public static string PDF_SP_GetSpoolCuadrantes = "PDF_SP_GetSpoolCuadrantes";
-        
-
+        public static string PDF_SP_GetNumeroControlProyecto = "PDF_SP_GetNumeroControlProyecto";
     }
 }

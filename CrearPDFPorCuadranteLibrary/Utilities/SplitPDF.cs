@@ -39,6 +39,7 @@ namespace CrearPDFPorCuadranteLibrary.Utilities
         {
             try
             {
+                nombreNuevoArchivoPDF = "PDF_" + nombreNuevoArchivoPDF;
                 int contador = 0;
                 string ruta = pathDestino + "\\" + nombreNuevoArchivoPDF + ".pdf";
                 string rutaArchivo = pathDestino + "\\" + nombreNuevoArchivoPDF + ".csv";
@@ -49,19 +50,45 @@ namespace CrearPDFPorCuadranteLibrary.Utilities
                     contador++;
                 }
 
-                string rutaNuevoDocumento = pathDestino + "\\" + (nombreNuevoArchivoPDF + " " + (contador == 0 ? "" : contador.ToString())).Trim() + ".pdf";
+                
 
                 this.pdfCopy = new PdfCopy(document, new FileStream(pathDestino + "\\" + (nombreNuevoArchivoPDF + " " + (contador == 0 ? "" : contador.ToString())).Trim() + ".pdf", FileMode.Create));
                 this.document.Open();
 
                 //creo el archivo csv
-                CrearArchivo.Instance.crearArchivo(rutaArchivo);
                 CrearArchivo.Instance.EscribirMensajeDocumento("","","Se creo el archivo " + nombreNuevoArchivoPDF + " " + contador + DateTime.Now.ToString());
                 mensaje = (nombreNuevoArchivoPDF + " " + (contador == 0 ? "" : contador.ToString())).Trim();
                 return true;
 
 
 
+            }
+            catch (Exception ex)
+            {
+                mensaje = ex.Message;
+                return false;
+            }
+
+        }
+
+        public bool CrearObtenerCSV(string pathDestino, string nombreNuevoArchivoPDF, out string mensaje)
+        {
+            try
+            {
+                nombreNuevoArchivoPDF = "PDF_" + nombreNuevoArchivoPDF;
+                int contador = 0;
+                
+                string rutaArchivo = pathDestino + "\\" + nombreNuevoArchivoPDF + ".csv";
+                while (File.Exists(rutaArchivo))
+                {
+                    rutaArchivo = pathDestino + "\\" + nombreNuevoArchivoPDF + " " + (contador + 1) + ".csv";
+                    contador++;
+                }
+                //creo el archivo csv
+                CrearArchivo.Instance.crearArchivo(rutaArchivo);
+                CrearArchivo.Instance.EscribirMensajeDocumento("", "", "Se creo el archivo " + nombreNuevoArchivoPDF + " " + contador + DateTime.Now.ToString());
+                mensaje = (nombreNuevoArchivoPDF + " " + (contador == 0 ? "" : contador.ToString())).Trim();
+                return true;
             }
             catch (Exception ex)
             {

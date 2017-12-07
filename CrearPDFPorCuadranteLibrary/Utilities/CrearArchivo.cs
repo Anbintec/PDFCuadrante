@@ -51,8 +51,8 @@ namespace CrearPDFPorCuadranteLibrary.Utilities
                     sw.WriteLine(ordenTrabajo+","+ numeroControl + ","+ comentario);
                     byte[] info = new UTF8Encoding(true).GetBytes(sw.ToString());
                     this.DocumentoActual.Write(info, 0, info.Length);
-                }
-                
+                } 
+
                 return true;
             }
             catch (Exception ex)
