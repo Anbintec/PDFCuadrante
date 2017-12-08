@@ -228,6 +228,8 @@
             // 
             // comboBoxCuadrante
             // 
+            this.comboBoxCuadrante.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboBoxCuadrante.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.comboBoxCuadrante.DisplayMember = "NombreCuadrante";
             this.comboBoxCuadrante.FormattingEnabled = true;
             this.comboBoxCuadrante.Location = new System.Drawing.Point(0, 58);
@@ -278,9 +280,9 @@
             // 
             this.panelLoading.BackColor = System.Drawing.Color.Transparent;
             this.panelLoading.Controls.Add(this.pictureBox2);
-            this.panelLoading.Location = new System.Drawing.Point(0, 48);
+            this.panelLoading.Location = new System.Drawing.Point(263, 277);
             this.panelLoading.Name = "panelLoading";
-            this.panelLoading.Size = new System.Drawing.Size(317, 339);
+            this.panelLoading.Size = new System.Drawing.Size(54, 110);
             this.panelLoading.TabIndex = 34;
             // 
             // pictureBox2

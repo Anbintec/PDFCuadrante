@@ -56,7 +56,7 @@ namespace CrearPDFPorCuadranteLibrary.Utilities
                 this.document.Open();
 
                 //creo el archivo csv
-                CrearArchivo.Instance.EscribirMensajeDocumento("","","Se creo el archivo " + nombreNuevoArchivoPDF + " " + contador + DateTime.Now.ToString());
+                //CrearArchivo.Instance.EscribirMensajeDocumento("","","Se creo el archivo " + nombreNuevoArchivoPDF + " " + contador + DateTime.Now.ToString());
                 mensaje = (nombreNuevoArchivoPDF + " " + (contador == 0 ? "" : contador.ToString())).Trim();
                 return true;
 
@@ -86,7 +86,7 @@ namespace CrearPDFPorCuadranteLibrary.Utilities
                 }
                 //creo el archivo csv
                 CrearArchivo.Instance.crearArchivo(rutaArchivo);
-                CrearArchivo.Instance.EscribirMensajeDocumento("", "", "Se creo el archivo " + nombreNuevoArchivoPDF + " " + contador + DateTime.Now.ToString());
+                CrearArchivo.Instance.EscribirMensajeDocumento("OrdenTrabajo", "Numero Control","Comentario" );
                 mensaje = (nombreNuevoArchivoPDF + " " + (contador == 0 ? "" : contador.ToString())).Trim();
                 return true;
             }
