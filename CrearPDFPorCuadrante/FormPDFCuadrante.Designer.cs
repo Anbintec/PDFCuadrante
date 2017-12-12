@@ -280,9 +280,9 @@
             // 
             this.panelLoading.BackColor = System.Drawing.Color.Transparent;
             this.panelLoading.Controls.Add(this.pictureBox2);
-            this.panelLoading.Location = new System.Drawing.Point(263, 277);
+            this.panelLoading.Location = new System.Drawing.Point(0, 48);
             this.panelLoading.Name = "panelLoading";
-            this.panelLoading.Size = new System.Drawing.Size(54, 110);
+            this.panelLoading.Size = new System.Drawing.Size(317, 339);
             this.panelLoading.TabIndex = 34;
             // 
             // pictureBox2

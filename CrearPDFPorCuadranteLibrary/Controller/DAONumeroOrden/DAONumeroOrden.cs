@@ -69,22 +69,22 @@ namespace CrearPDFPorCuadranteLibrary.Controller.DAONumeroOrden
 
                 if (proyecto == null || proyecto.ProyectoID <= 0)
                 {
-                    mensageError = "Selecciona un proyecto porfavor";
+                    mensageError = "Selecciona un proyecto";
                     return false;
                 }
                 else if (tipoBusqueda == 1 && (cuadrante == null || cuadrante.CuadranteID <= 0))
                 {
-                    mensageError = "Selecciona un cuadrante porfavor";
+                    mensageError = "Selecciona un cuadrante";
                     return false;
                 }
                 else if (pathDestino == string.Empty)
                 {
-                    mensageError = "Selecciona una carpeta de destino porfavor";
+                    mensageError = "Selecciona una carpeta de destino";
                     return false;
                 }
                 else if (tipoBusqueda == 2 && path == "")
                 {
-                    mensageError = "Selecciona un archivo porfavor";
+                    mensageError = "Selecciona un archivo";
                     return false;
                 }
                 else if (tipoBusqueda == 0)
@@ -172,127 +172,151 @@ namespace CrearPDFPorCuadranteLibrary.Controller.DAONumeroOrden
                 else if (tipoBusqueda == 2)//csv
                 {
                     DataTable dt = ConvertToDataTable(path, 1);
-
-                    DataSet dataSet = DAONumeroOrden.Instance.ValidarNumerosControl(dt, proyecto.ProyectoID);
-
-                    dtSpools = dataSet.Tables[0];
-                    string mensajeCrearPDF = "";
-                    string mensajeNombreCsv;
-                    SplitPDF.Instance.CrearObtenerCSV(pathDestino, nombreArchivo.Split('.')[0], out mensajeNombreCsv);
-
-                    for (int i = 0; i < dtSpools.Rows.Count; i++)
+                    if (dt.Rows.Count < 70)
                     {
-                        if ((ExisteNumeroOrdenPath(proyecto.pathRutaCompartida, dtSpools.Rows[i][0].ToString())))
-                            cantidadArchivosEncontrados++;
-                    }
+                      
+                        DataSet dataSet = DAONumeroOrden.Instance.ValidarNumerosControl(dt, proyecto.ProyectoID);
 
-                    if (dtSpools.Rows.Count > 0 && dtSpools.Rows.Count <= 70)
-                    {
-                        if (cantidadArchivosEncontrados > 0)
+                        dtSpools = dataSet.Tables[0];
+                        string mensajeCrearPDF = "";
+                        string mensajeNombreCsv;
+                        SplitPDF.Instance.CrearObtenerCSV(pathDestino, nombreArchivo.Split('.')[0], out mensajeNombreCsv);
+
+                        for (int i = 0; i < dtSpools.Rows.Count; i++)
                         {
-                            if (SplitPDF.Instance.CrearObtenerPDF(pathDestino, nombreArchivo.Split('.')[0], out mensajeCrearPDF))
+                            if ((ExisteNumeroOrdenPath(proyecto.pathRutaCompartida, dtSpools.Rows[i][0].ToString())))
+                                cantidadArchivosEncontrados++;
+                        }
+
+                        if (dtSpools.Rows.Count > 0 && dtSpools.Rows.Count <= 70)
+                        {
+                            if (cantidadArchivosEncontrados > 0)
                             {
-
-
-                                if (dtSpools.Rows.Count > 0 && dtSpools.Rows.Count <= 70)
+                                if (SplitPDF.Instance.CrearObtenerPDF(pathDestino, nombreArchivo.Split('.')[0], out mensajeCrearPDF))
                                 {
 
 
-                                    if (dataSet.Tables[1].Rows.Count > 0)
+                                    if (dtSpools.Rows.Count > 0 && dtSpools.Rows.Count <= 70)
                                     {
-                                        for (int i = 0; i < dataSet.Tables[1].Rows.Count; i++)
-                                        {
-                                            CrearArchivo.Instance.EscribirMensajeDocumento("", dataSet.Tables[1].Rows[i][0].ToString(), "No pertenece al proyecto " + proyecto.NombreProyecto);
-                                        }
-                                    }
 
-                                    foreach (DataRow item in dtSpools.Rows)
-                                    {
-                                        string ruta = System.IO.Path.Combine(proyecto.pathRutaCompartida, "ODT " + item[0].ToString() + ".pdf");
-                                        try
-                                        {
-                                            if (ExisteNumeroOrdenPath(proyecto.pathRutaCompartida, item[0].ToString()))
-                                            {
-                                                int numeroPaginasPDF = SplitPDF.Instance.CantidadDePaginas(ruta) - int.Parse(item[2].ToString());
 
-                                                try
-                                                {
-                                                    SplitPDF.Instance.SplitAndSaveInterval(ruta, pathDestino, numeroPaginasPDF, 1, mensajeCrearPDF, item[0].ToString(), item[0].ToString() + "-" + item[1].ToString());
-                                                }
-                                                catch (Exception ex)
-                                                {
-                                                    CrearArchivo.Instance.EscribirMensajeDocumento(item[0].ToString(), item[0].ToString() + "-" + item[1].ToString(), "Error desconocido " + ex.Message);
-                                                }
-                                            }
-                                            else
+                                        if (dataSet.Tables[1].Rows.Count > 0)
+                                        {
+                                            for (int i = 0; i < dataSet.Tables[1].Rows.Count; i++)
                                             {
-                                                CrearArchivo.Instance.EscribirMensajeDocumento(item[0].ToString(), item[0].ToString() + "-" + item[1].ToString(), "No existe el archivo pdf en la carpeta compartida");
+                                                CrearArchivo.Instance.EscribirMensajeDocumento("", dataSet.Tables[1].Rows[i][0].ToString(), "No pertenece al proyecto " + proyecto.NombreProyecto);
                                             }
                                         }
-                                        catch (Exception ex)
+
+                                        foreach (DataRow item in dtSpools.Rows)
                                         {
-                                            CrearArchivo.Instance.EscribirMensajeDocumento(item[0].ToString(), item[0].ToString() + "-" + item[1].ToString(), ex.Message);
+                                            string ruta = System.IO.Path.Combine(proyecto.pathRutaCompartida, "ODT " + item[0].ToString() + ".pdf");
+                                            try
+                                            {
+                                                if (ExisteNumeroOrdenPath(proyecto.pathRutaCompartida, item[0].ToString()))
+                                                {
+                                                    int numeroPaginasPDF = SplitPDF.Instance.CantidadDePaginas(ruta) - int.Parse(item[2].ToString());
+
+                                                    try
+                                                    {
+                                                        SplitPDF.Instance.SplitAndSaveInterval(ruta, pathDestino, numeroPaginasPDF, 1, mensajeCrearPDF, item[0].ToString(), item[0].ToString() + "-" + item[1].ToString());
+                                                    }
+                                                    catch (Exception ex)
+                                                    {
+                                                        CrearArchivo.Instance.EscribirMensajeDocumento(item[0].ToString(), item[0].ToString() + "-" + item[1].ToString(), "Error desconocido " + ex.Message);
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    CrearArchivo.Instance.EscribirMensajeDocumento(item[0].ToString(), item[0].ToString() + "-" + item[1].ToString(), "No existe el archivo pdf en la carpeta compartida");
+                                                }
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                CrearArchivo.Instance.EscribirMensajeDocumento(item[0].ToString(), item[0].ToString() + "-" + item[1].ToString(), ex.Message);
+                                            }
                                         }
+                                        if (SplitPDF.Instance.AgregoPaginas)
+                                        {
+                                            SplitPDF.Instance.document.Close();
+                                            SplitPDF.Instance.CerrarDocumentoCreado(pathDestino + "\\" + mensajeCrearPDF.Trim() + ".pdf");
+                                        }
+                                        CrearArchivo.Instance.CerrarDocumento();
+                                        mensageError = mensageError = mensajeCrearPDF + " con " + SplitPDF.CantidadTravelers.ToString();
+                                        return true;
+                                        // escribir que se cerro el documento.
+
+
                                     }
-                                    if (SplitPDF.Instance.AgregoPaginas)
+                                    else
                                     {
-                                        SplitPDF.Instance.document.Close();
-                                        SplitPDF.Instance.CerrarDocumentoCreado(pathDestino + "\\" + mensajeCrearPDF.Trim() + ".pdf");
+
+                                        if (dtSpools.Rows.Count > 70)
+                                            CrearArchivo.Instance.EscribirMensajeDocumento("", "", "La cantidad de numeros de control que coinciden son mas de 70");
+
+                                        for (int i = 0; i < dtSpools.Rows.Count; i++)
+                                        {
+                                            CrearArchivo.Instance.EscribirMensajeDocumento("", dtSpools.Rows[i][0].ToString() + "" + dtSpools.Rows[i][1].ToString(), "coincide con el proyecto " + proyecto.NombreProyecto);
+                                        }
+
+
+
+                                        if (dataSet.Tables[1].Rows.Count > 0)
+                                        {
+                                            for (int i = 0; i < dataSet.Tables[1].Rows.Count; i++)
+                                            {
+                                                CrearArchivo.Instance.EscribirMensajeDocumento("", dataSet.Tables[1].Rows[i][0].ToString(), "No pertenece al proyecto " + proyecto.NombreProyecto);
+                                            }
+                                        }
+
+                                        if (SplitPDF.Instance.AgregoPaginas)
+                                        {
+                                            SplitPDF.Instance.document.Close();
+                                            SplitPDF.Instance.CerrarDocumentoCreado(pathDestino + "\\" + mensajeCrearPDF.Trim() + ".pdf");
+                                        }
+                                        CrearArchivo.Instance.CerrarDocumento();
+
+                                        mensageError = SplitPDF.CantidadTravelers.ToString();
+                                        return false;
+
                                     }
-                                    CrearArchivo.Instance.CerrarDocumento();
-                                    mensageError = mensageError = mensajeCrearPDF + " con " + SplitPDF.CantidadTravelers.ToString();
-                                    return true;
-                                    // escribir que se cerro el documento.
 
 
                                 }
                                 else
                                 {
-
-                                    if (dtSpools.Rows.Count > 70)
-                                        CrearArchivo.Instance.EscribirMensajeDocumento("", "", "La cantidad de numeros de control que coinciden son mas de 70");
-
-                                    for (int i = 0; i < dtSpools.Rows.Count; i++)
-                                    {
-                                        CrearArchivo.Instance.EscribirMensajeDocumento("", dtSpools.Rows[i][0].ToString() + "" + dtSpools.Rows[i][1].ToString(), "coincide con el proyecto " + proyecto.NombreProyecto);
-                                    }
-
-
-
-                                    if (dataSet.Tables[1].Rows.Count > 0)
-                                    {
-                                        for (int i = 0; i < dataSet.Tables[1].Rows.Count; i++)
-                                        {
-                                            CrearArchivo.Instance.EscribirMensajeDocumento("", dataSet.Tables[1].Rows[i][0].ToString(), "No pertenece al proyecto " + proyecto.NombreProyecto);
-                                        }
-                                    }
-
-                                    if (SplitPDF.Instance.AgregoPaginas)
-                                    {
-                                        SplitPDF.Instance.document.Close();
-                                        SplitPDF.Instance.CerrarDocumentoCreado(pathDestino + "\\" + mensajeCrearPDF.Trim() + ".pdf");
-                                    }
-                                    CrearArchivo.Instance.CerrarDocumento();
-
-                                    mensageError = SplitPDF.CantidadTravelers.ToString();
+                                    mensageError = "No se pudo crear el archivo pdf " + mensajeCrearPDF;
                                     return false;
-
                                 }
-
-
                             }
                             else
                             {
-                                mensageError = "No se pudo crear el archivo pdf " + mensajeCrearPDF;
+                                mensageError = "No se generó archivo con travelers, revisar archivo " + mensajeNombreCsv + ".csv para mayor informaciòn";
+                                for (int i = 0; i < dtSpools.Rows.Count; i++)
+                                {
+                                    CrearArchivo.Instance.EscribirMensajeDocumento(dtSpools.Rows[i][0].ToString(), dtSpools.Rows[i][0].ToString() + "-" + dtSpools.Rows[i][1].ToString(), "no se encontro  el archivo pdf en la ruta de la carpeta compartida");
+                                }
+                                CrearArchivo.Instance.CerrarDocumento();
                                 return false;
                             }
                         }
                         else
                         {
                             mensageError = "No se generó archivo con travelers, revisar archivo " + mensajeNombreCsv + ".csv para mayor informaciòn";
-                            for (int i = 0; i < dtSpools.Rows.Count; i++)
+                            //for (int i = 0; i < dtSpools.Rows.Count; i++)
+                            //{
+                            //    CrearArchivo.Instance.EscribirMensajeDocumento(dtSpools.Rows[i][0].ToString(), dtSpools.Rows[i][0].ToString() + "-" + dtSpools.Rows[i][1].ToString(), " maximo tienen que ser 70 numeros de control en el archivo");
+                            //}
+                            if (dtSpools.Rows.Count > 70)
                             {
-                                CrearArchivo.Instance.EscribirMensajeDocumento(dtSpools.Rows[i][0].ToString(), dtSpools.Rows[i][0].ToString() + "-" + dtSpools.Rows[i][1].ToString(), "no se encontro  el archivo pdf en la ruta de la carpeta compartida");
+                                mensageError = "Como máximo tienen que ser 70 numeros de control para iniciar con el proceso.";
+                            }
+                            if (dataSet.Tables[1].Rows.Count > 0)
+                            {
+                                for (int i = 0; i < dataSet.Tables[1].Rows.Count; i++)
+                                {
+                                    CrearArchivo.Instance.EscribirMensajeDocumento("", dataSet.Tables[1].Rows[i][0].ToString(), "No pertenece al proyecto " + proyecto.NombreProyecto);
+                                }
                             }
                             CrearArchivo.Instance.CerrarDocumento();
                             return false;
@@ -300,19 +324,7 @@ namespace CrearPDFPorCuadranteLibrary.Controller.DAONumeroOrden
                     }
                     else
                     {
-                        mensageError = "No se generó archivo con travelers, revisar archivo " + mensajeNombreCsv + ".csv para mayor informaciòn";
-                        for (int i = 0; i < dtSpools.Rows.Count; i++)
-                        {
-                            CrearArchivo.Instance.EscribirMensajeDocumento(dtSpools.Rows[i][0].ToString(), dtSpools.Rows[i][0].ToString() + "-" + dtSpools.Rows[i][1].ToString(), " maximo tienen que ser 70 numeros de control en el archivo");
-                        }
-                        if (dataSet.Tables[1].Rows.Count > 0)
-                        {
-                            for (int i = 0; i < dataSet.Tables[1].Rows.Count; i++)
-                            {
-                                CrearArchivo.Instance.EscribirMensajeDocumento("", dataSet.Tables[1].Rows[i][0].ToString(), "No pertenece al proyecto " + proyecto.NombreProyecto);
-                            }
-                        }
-                        CrearArchivo.Instance.CerrarDocumento();
+                        mensageError = " El número máximo permitido es 70 ";
                         return false;
                     }
 
